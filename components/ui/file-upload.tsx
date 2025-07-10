@@ -3,7 +3,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Progress } from '@/components/ui/progress';
+// import { Progress } from '@/components/ui/progress';
 import { Badge } from '@/components/ui/badge';
 import { 
   Upload, 
@@ -236,7 +236,12 @@ export function FileUpload({
                 
                 {isUploading && (
                   <div className="mt-3">
-                    <Progress value={uploadProgress} className="h-2" />
+                    <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div 
+                        className="bg-blue-600 h-2 rounded-full transition-all duration-300" 
+                        style={{ width: `${uploadProgress}%` }}
+                      />
+                    </div>
                     <p className="text-xs text-gray-500 mt-1">
                       Uploading... {uploadProgress}%
                     </p>

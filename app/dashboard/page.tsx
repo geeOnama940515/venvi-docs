@@ -43,7 +43,7 @@ export default function DashboardPage() {
   const [documents, setDocuments] = useState<Document[]>([]);
   const [filteredDocuments, setFilteredDocuments] = useState<Document[]>([]);
   const [selectedDocument, setSelectedDocument] = useState<Document | null>(null);
-  const [transferDocument, setTransferDocument] = useState<Document | null>(null);
+  const [transferDocModal, setTransferDocModal] = useState<Document | null>(null);
   const [awaitingDocuments, setAwaitingDocuments] = useState<Document[]>([]);
   const [possessionDocuments, setPossessionDocuments] = useState<Document[]>([]);
   const [searchTerm, setSearchTerm] = useState('');
@@ -275,7 +275,7 @@ export default function DashboardPage() {
       addNotification(notification);
       
       refreshData();
-      setTransferDocument(null);
+      setTransferDocModal(null);
     }
   };
 
@@ -499,7 +499,7 @@ export default function DashboardPage() {
                       onTransfer={
                         document.currentPossession.userId === currentUser.id && 
                         document.currentPossession.status === 'Accepted'
-                          ? (doc) => setTransferDocument(doc)
+                          ? (doc) => setTransferDocModal(doc)
                           : undefined
                       }
                     />
@@ -555,7 +555,7 @@ export default function DashboardPage() {
                           onDownload={(doc) => {
                             console.log('Downloading:', doc.fileName);
                           }}
-                          onTransfer={(doc) => setTransferDocument(doc)}
+                          onTransfer={(doc) => setTransferDocModal(doc)}
                         />
                       ))}
                     </div>
@@ -979,9 +979,9 @@ export default function DashboardPage() {
 
       {/* Document Transfer Modal */}
       <DocumentTransfer
-        document={transferDocument}
-        isOpen={!!transferDocument}
-        onClose={() => setTransferDocument(null)}
+        document={transferDocModal}
+        isOpen={!!transferDocModal}
+        onClose={() => setTransferDocModal(null)}
         onTransfer={handleDocumentTransfer}
         currentUserId={currentUser.id}
       />
